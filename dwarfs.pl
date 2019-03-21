@@ -14,18 +14,51 @@
 
 %% What is the order of the dwarves?
 
-%% Answer: Doc, Happy, Smelly, Sneezy, Stumpy, Sleepy, Grumpy, Dopey, Droopy, Bashful
+%% Answer: Doc, Happy, Smelly, Sneezy, Stumpy, Sleepy, Grumpy, Dopey, Dr
+
+front(X,Y) :- behind(Y,X).
+
+front(grumpy,dopey).
+front(doc,droopy).
+front(doc,happy).
+front(happy,sleepy).
+front(happy,smelly).
+front(happy,bashful).
+front(sneezy,dopey).
+front(smelly,grumpy).
+front(smelly,stumpy).
+front(smelly,sneezy).
+front(dopey,droopy).
+front(sleepy,grumpy).
+front(sleepy,bashful).
+front(stumpy,dopey).
+
+behind(X,Y) :- front(Y,X).
+
+behind(stumpy,sneezy).
+behind(stumpy,doc).
+behind(sleepy,stumpy).
+behind(sleepy,smelly).
+behind(sleepy,happy).
+behind(bashful,smelly).
+behind(bashful,droopy).
+behind(bashful,sleepy).
+behind(dopey,sneezy).
+behind(dopey,doc).
+behind(dopey,sleepy).
+behind(smelly,doc).
 
 % define start.
 start() :- 
 	% randomly initialized list will be sorted based on facts given.
-	% first arg - list of dwarves, second arg - list for comparison, last arg - store
-	order([grumpy, bashful, droopy, dopey, doc, happy, sneezy, smelly, sleepy, stumpy], [grumpy, bashful, droopy, dopey, doc, happy, sneezy, smelly, sleepy, stumpy], []).
+	% first arg - list of dwarves, second arg - initial order
+	order([bashful, droopy, dopey, doc, happy, sneezy, smelly, sleepy, stumpy], [grumpy]).
 
 % this function will check the placement of the dwarves.
-order([Dwarf|Next|Others], [First|Rest], Order) :-
-	% if First is in front of Next, then the function will move to check the Rest.
-	(front(Dwarf, Next) -> write(Order), nl, order([Dwarf|Others], Rest, [Dwarf, Next])
-			% if First is behind Next, the list will be rearranged.
-		; write(Order), nl, order(List, Rest, )
+
+order([Dwarf|[]], Order) :- write("Order is: "), write(Order), nl.
+
+order([Dwarf|Others], [First|Rest]) :-
+	(front(Dwarf, First) -> order(Others, [Dwarf, First|Rest])
+		; order([Dwarf|Others], Rest)
 	).
