@@ -23,9 +23,9 @@ start() :-
 	order([grumpy, bashful, droopy, dopey, doc, happy, sneezy, smelly, sleepy, stumpy], [grumpy, bashful, droopy, dopey, doc, happy, sneezy, smelly, sleepy, stumpy], []).
 
 % this function will check the placement of the dwarves.
-order([Dwarf|Others], [First|Rest], Order) :-
+order([Dwarf|Next|Others], [First|Rest], Order) :-
 	% if First is in front of Next, then the function will move to check the Rest.
-	(front(Dwarf, Next) -> write(Order), nl, order([Dwarf|Others], Rest, [, Next])
+	(front(Dwarf, Next) -> write(Order), nl, order([Dwarf|Others], Rest, [Dwarf, Next])
 			% if First is behind Next, the list will be rearranged.
 		; write(Order), nl, order(List, Rest, )
 	).
