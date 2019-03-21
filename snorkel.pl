@@ -38,6 +38,6 @@ number(X,Y) :- write(X), write("'s number is "), write(Y), nl.
 
 number(X, 2) :- place(X, 1). % (5)
 
-%% start() :- write("The order is: "), query([gary, barry, larry, harry]).
+start() :- write("The order is: "), query([gary, barry, larry, harry]).
 
-query([A|B|C]) :- (beat(A, B) -> ;).
+query([A,B|C]) :- ().

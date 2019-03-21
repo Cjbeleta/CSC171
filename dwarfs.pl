@@ -48,6 +48,8 @@ behind(dopey,doc).
 behind(dopey,sleepy).
 behind(smelly,doc).
 
+% will use built-in prolog function append/3
+
 % define start.
 start() :- 
 	% randomly initialized list will be sorted based on facts given.
@@ -58,7 +60,18 @@ start() :-
 
 order([Dwarf|[]], Order) :- write("Order is: "), write(Order), nl.
 
+order([Dwarf|Others], [First|[]]) :- 
+
+	(front(Dwarf, First) -> order(Others, [Dwarf, First])
+
+		; order([Others], [First, Dwarf])
+
+	).
+
 order([Dwarf|Others], [First|Rest]) :-
+
 	(front(Dwarf, First) -> order(Others, [Dwarf, First|Rest])
-		; order([Dwarf|Others], Rest)
+
+		; order([Dwarf|Others], [First, Rest])
+
 	).
