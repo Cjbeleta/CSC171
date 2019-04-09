@@ -1,0 +1,40 @@
+/*
+
+Reference: https://github.com/ardamavi/8-Puzzle-JavaScript
+
+*/
+
+#puzzle {
+	margin: auto;
+	text-align: center;
+}
+
+.tile {
+	width: 150px;
+	height: 150px;
+	font-size: 50px;
+	color: white;
+	background-color: #143356;
+	font-family: 'calibri','serif'
+}
+
+.tile:hover {
+	color: white;
+	background-color: #143356;
+}
+
+.blank {
+	background-color: white;
+}
+
+.blank:hover {
+	background-color: white;
+}
+
+.action {
+	width: 100% !important;
+	background-color: #143356;
+	color: white;
+	font-size: 30px;
+	font-family: 'calibri','serif';
+}
